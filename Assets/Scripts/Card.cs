@@ -1,4 +1,4 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
@@ -22,10 +22,18 @@ public class Card : MonoBehaviour
     [SerializeField] Image characterArt;
     [SerializeField] Image backgroundArt;
 
+    [SerializeField] float moveSpeed = 5f;
+    [SerializeField] float rotateSpeed = 540f;
+
+    Vector3 targetPos;
+    Quaternion targetRotation;
+
+
 
     void Start()
     {
         SetupCard();
+
     }
 
     private void SetupCard()
@@ -46,9 +54,16 @@ public class Card : MonoBehaviour
         backgroundArt.sprite = cardSO.bgSprite;
     }
 
-    // Update is called once per frame
     void Update()
     {
-        
+        transform.position = Vector3.Lerp(transform.position, targetPos, moveSpeed * Time.deltaTime);
+        transform.rotation = Quaternion.RotateTowards(transform.rotation, targetRotation, rotateSpeed * Time.deltaTime);
+    }
+
+    public void MoveToPoint(Vector3 pointToMoveTo, Quaternion pointToRollTo)
+    {
+        targetPos = pointToMoveTo;
+        targetRotation = pointToRollTo;
+
     }
 }

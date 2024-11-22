@@ -20,8 +20,8 @@ public class HandController : MonoBehaviour
         
     }
 
-    public void SetCardPositionsInHand()
-    {
+    public void SetCardPositionsInHand() //kartlar su sekilde yerlesiyor, sondaki kart en sona bastaki kart en basa yerlesiyor ardaki noktalar hesaplaniyor
+    {                                    //sirasiyla en bastan en sona dogru kartla yerlesiyor
         cardPositions.Clear();
 
         Vector3 distanceBetweenPoints = Vector3.zero;
@@ -36,8 +36,10 @@ public class HandController : MonoBehaviour
             Vector3 position = minPos.position + (distanceBetweenPoints * i);
             cardPositions.Add(position);
 
-            heldCards[i].transform.position = cardPositions[i];
-            heldCards[i].transform.rotation = minPos.rotation; //we set z rotation value of minPos -5
+            //heldCards[i].transform.position = cardPositions[i];
+            //heldCards[i].transform.rotation = minPos.rotation; //we set z rotation value of minPos -5
+
+            heldCards[i].MoveToPoint(cardPositions[i], minPos.rotation);
         }
     }
 }
