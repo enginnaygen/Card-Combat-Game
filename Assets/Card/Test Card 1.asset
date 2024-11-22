@@ -12,11 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f562e18fc36dfb741b699e35a7b3d22d, type: 3}
   m_Name: Test Card 1
   m_EditorClassIdentifier: 
-  cardName: Try
-  actionDescription: Mry
-  cardLore: Dungeon Creature
-  currentHealth: 2
-  attackPower: 1
-  manaCost: 3
-  bgSprite: {fileID: 21300000, guid: 95bae3e75408f0b4392f33af0bbd2888, type: 3}
-  characterSprite: {fileID: 21300000, guid: a6ef78d47a00c1547a3567caa54f2139, type: 3}
+  cardName: Gry
+  actionDescription: Dry
+  cardLore: Forest Creature
+  currentHealth: 3
+  attackPower: 2
+  manaCost: 4
+  bgSprite: {fileID: 21300000, guid: e3d89e19a761a504ba8b8e785d1a420e, type: 3}
+  characterSprite: {fileID: 21300000, guid: bebfa67a9a0e405418b1fea3d82e2f85, type: 3}
