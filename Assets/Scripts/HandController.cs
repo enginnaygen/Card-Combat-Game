@@ -37,6 +37,7 @@ public class HandController : MonoBehaviour
             cardPositions.Add(position);
 
             heldCards[i].transform.position = cardPositions[i];
+            heldCards[i].transform.rotation = minPos.rotation; //we set z rotation value of minPos -5
         }
     }
 }
