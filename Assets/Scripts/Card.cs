@@ -25,12 +25,17 @@ public class Card : MonoBehaviour
     [SerializeField] float moveSpeed = 5f;
     [SerializeField] float rotateSpeed = 540f;
 
+    [SerializeField] LayerMask whatsDestkop;
+
     public bool inHand;
     public int handPosition;
 
     Vector3 targetPos;
     Quaternion targetRotation;
     HandController handController;
+    Collider collider;
+
+    bool isSelected;
 
 
 
@@ -40,6 +45,7 @@ public class Card : MonoBehaviour
     private void Awake()
     {
         handController = FindObjectOfType<HandController>();
+        collider = GetComponent<BoxCollider>();
     }
 
     void Start()
@@ -74,6 +80,18 @@ public class Card : MonoBehaviour
                                                                                                       // dogru yaklasiyor seklinde anladim
         transform.rotation = Quaternion.RotateTowards(transform.rotation, targetRotation, rotateSpeed * Time.deltaTime);
 
+        if(isSelected)
+        {
+            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+
+            RaycastHit hit;
+            if(Physics.Raycast(ray, out hit, 100f, whatsDestkop))
+            {
+                MoveToPoint(hit.point + Vector3.up, Quaternion.identity);
+            }
+
+        }
+
         /*transform.position = Vector3.Lerp(transform.position, targetPos, progress);
 
         if (progress > 1) return;
@@ -103,5 +121,14 @@ public class Card : MonoBehaviour
     private void OnMouseExit()
     {
         MoveToPoint(handController.CardPositions[handPosition], targetRotation);
+    }
+
+    private void OnMouseDown()
+    {
+        if(inHand)
+        {
+            isSelected = true;
+            collider.enabled = false;
+        }
     }
 }
