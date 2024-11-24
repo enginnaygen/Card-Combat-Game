@@ -25,7 +25,7 @@ public class Card : MonoBehaviour
     [SerializeField] float moveSpeed = 5f;
     [SerializeField] float rotateSpeed = 540f;
 
-    [SerializeField] LayerMask whatsDestkop;
+    [SerializeField] LayerMask whatsDestkop, whatIsPlacement;
 
     public bool inHand;
     public int handPosition;
@@ -36,6 +36,9 @@ public class Card : MonoBehaviour
     Collider collider;
 
     bool isSelected;
+    bool isPressed;
+
+    CardPlacement cardAssingedPlace;
 
 
 
@@ -88,14 +91,47 @@ public class Card : MonoBehaviour
             if(Physics.Raycast(ray, out hit, 100f, whatsDestkop))
             {
                 MoveToPoint(hit.point + Vector3.up, Quaternion.identity);
+
             }
 
+            if (Input.GetMouseButtonDown(1))
+            {
+                ReturnToHand();
+            }
+
+            if (Input.GetMouseButtonDown(0) && !isPressed)
+            {
+
+                if (Physics.Raycast(ray, out hit, 100f, whatIsPlacement))
+                {
+                    CardPlacement selectedPoint = hit.collider.GetComponent<CardPlacement>();
+
+                    if(selectedPoint.ActiveCard == null && selectedPoint.IsPlayerPoint)
+                    {
+                        selectedPoint.ActiveCard = this;
+                        cardAssingedPlace = selectedPoint;
+
+                        MoveToPoint(selectedPoint.transform.position + new Vector3(0f,0f, .38f), Quaternion.identity);
+
+                        inHand = false;
+                        isSelected = false;
+                    }
+                    else
+                    {
+                        ReturnToHand();
+                    }
+                }
+                else
+                {
+                    ReturnToHand();
+                }
+            }
+
+            isPressed = false;
+
         }
 
-        if(Input.GetMouseButtonDown(1))
-        {
-            ReturnToHand();
-        }
+       
 
         /*transform.position = Vector3.Lerp(transform.position, targetPos, progress);
 
@@ -141,6 +177,8 @@ public class Card : MonoBehaviour
         {
             isSelected = true;
             collider.enabled = false;
+
+            isPressed = true;
         }
     }
 }
