@@ -25,13 +25,26 @@ public class Card : MonoBehaviour
     [SerializeField] float moveSpeed = 5f;
     [SerializeField] float rotateSpeed = 540f;
 
+    public bool inHand;
+    public int handPosition;
+
     Vector3 targetPos;
     Quaternion targetRotation;
+    HandController handController;
 
 
+
+    //Vector3 startPos;
+    //float progress;
+
+    private void Awake()
+    {
+        handController = FindObjectOfType<HandController>();
+    }
 
     void Start()
     {
+        //startPos = transform.position;
         SetupCard();
 
     }
@@ -56,8 +69,15 @@ public class Card : MonoBehaviour
 
     void Update()
     {
-        transform.position = Vector3.Lerp(transform.position, targetPos, moveSpeed * Time.deltaTime);
+        
+        transform.position = Vector3.Lerp(transform.position, targetPos, moveSpeed * Time.deltaTime); //transform.position'u surekli ileri gittiğinden surekli sona
+                                                                                                      // dogru yaklasiyor seklinde anladim
         transform.rotation = Quaternion.RotateTowards(transform.rotation, targetRotation, rotateSpeed * Time.deltaTime);
+
+        /*transform.position = Vector3.Lerp(transform.position, targetPos, progress);
+
+        if (progress > 1) return;
+        progress += Time.deltaTime;*/
     }
 
     public void MoveToPoint(Vector3 pointToMoveTo, Quaternion pointToRollTo)
@@ -65,5 +85,23 @@ public class Card : MonoBehaviour
         targetPos = pointToMoveTo;
         targetRotation = pointToRollTo;
 
+    }
+
+    private void OnMouseOver()
+    {
+        if(inHand)
+        {
+            MoveToPoint(handController.CardPositions[handPosition] + new Vector3(0f, 1f, .5f), Quaternion.identity);
+            /*Vector3 startPos = transform.position;
+            Quaternion startRot = transform.rotation;
+            transform.position = Vector3.Lerp(startPos, startPos + Vector3.up, moveSpeed * Time.deltaTime);
+            transform.rotation = Quaternion.RotateTowards(startRot, Quaternion.identity, rotateSpeed * Time.deltaTime);*/
+        }
+        
+    }
+
+    private void OnMouseExit()
+    {
+        MoveToPoint(handController.CardPositions[handPosition], targetRotation);
     }
 }

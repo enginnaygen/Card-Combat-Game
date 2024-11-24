@@ -9,6 +9,8 @@ public class HandController : MonoBehaviour
     [SerializeField] Transform minPos;
     [SerializeField] Transform maxPos;
     [SerializeField] List<Vector3> cardPositions = new List<Vector3>();
+
+    public List<Vector3> CardPositions => cardPositions;
     void Start()
     {
         SetCardPositionsInHand();
@@ -40,6 +42,9 @@ public class HandController : MonoBehaviour
             //heldCards[i].transform.rotation = minPos.rotation; //we set z rotation value of minPos -5
 
             heldCards[i].MoveToPoint(cardPositions[i], minPos.rotation);
+
+            heldCards[i].inHand = true;
+            heldCards[i].handPosition = i;
         }
     }
 }
