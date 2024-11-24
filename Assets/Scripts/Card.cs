@@ -92,10 +92,22 @@ public class Card : MonoBehaviour
 
         }
 
+        if(Input.GetMouseButtonDown(1))
+        {
+            ReturnToHand();
+        }
+
         /*transform.position = Vector3.Lerp(transform.position, targetPos, progress);
 
         if (progress > 1) return;
         progress += Time.deltaTime;*/
+    }
+
+    private void ReturnToHand()
+    {
+        isSelected = false;
+        collider.enabled = true;
+        MoveToPoint(handController.CardPositions[handPosition], targetRotation);
     }
 
     public void MoveToPoint(Vector3 pointToMoveTo, Quaternion pointToRollTo)
