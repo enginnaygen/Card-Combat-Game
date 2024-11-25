@@ -124,6 +124,7 @@ public class Card : MonoBehaviour
                         }
                         else
                         {
+                            UIController.Instance.WarningMana();
                             ReturnToHand();
                         }
                     }
