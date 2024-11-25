@@ -36,7 +36,7 @@ public class Card : MonoBehaviour
     Collider collider;
 
     bool isSelected;
-    bool isPressed;
+    bool justPressed;
 
     CardPlacement cardAssingedPlace;
 
@@ -99,7 +99,7 @@ public class Card : MonoBehaviour
                 ReturnToHand();
             }
 
-            if (Input.GetMouseButtonDown(0) && !isPressed)
+            if (Input.GetMouseButtonDown(0) && !justPressed)
             {
 
                 if (Physics.Raycast(ray, out hit, 100f, whatIsPlacement))
@@ -115,6 +115,8 @@ public class Card : MonoBehaviour
 
                         inHand = false;
                         isSelected = false;
+
+                        handController.RemoveCardFromHand(this);
                     }
                     else
                     {
@@ -127,7 +129,7 @@ public class Card : MonoBehaviour
                 }
             }
 
-            isPressed = false;
+            justPressed = false;
 
         }
 
@@ -178,7 +180,7 @@ public class Card : MonoBehaviour
             isSelected = true;
             collider.enabled = false;
 
-            isPressed = true;
+            justPressed = true;
         }
     }
 }

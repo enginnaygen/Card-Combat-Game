@@ -47,4 +47,20 @@ public class HandController : MonoBehaviour
             heldCards[i].handPosition = i;
         }
     }
+
+    public void RemoveCardFromHand(Card cardToRemove)
+    {
+        if (heldCards[cardToRemove.handPosition] == cardToRemove)
+        {
+            //heldCards.Remove(cardToRemove);
+            heldCards.RemoveAt(cardToRemove.handPosition);
+        }
+        else
+        {
+            Debug.LogError("Card at position" + cardToRemove.handPosition + "is not the card being removed");
+        }
+        SetCardPositionsInHand();
+
+
+    }
 }
