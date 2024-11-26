@@ -39,6 +39,7 @@ public class Card : MonoBehaviour
     bool justPressed;
 
     CardPlacement cardAssingedPlace;
+    public CardScriptableObject CardSO { get { return cardSO; } set { cardSO = value; } }
 
 
 
@@ -58,7 +59,7 @@ public class Card : MonoBehaviour
 
     }
 
-    private void SetupCard()
+    public void SetupCard()
     {
         currentHealth = cardSO.currentHealth;
         attackPower = cardSO.attackPower;

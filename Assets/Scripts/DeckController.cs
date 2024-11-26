@@ -11,6 +11,8 @@ public class DeckController : MonoBehaviour
 
     public List<CardScriptableObject> DeckToUse => deckToUse;
 
+    [SerializeField] Card cardToSpawn;
+
 
     private void Awake()
     {
@@ -20,6 +22,14 @@ public class DeckController : MonoBehaviour
     private void Start()
     {
         SetupDeck();
+    }
+
+    private void Update()
+    {
+        if(Input.GetKeyDown(KeyCode.Space))
+        {
+            DrawCardToHand();
+        }
     }
 
     private void Singelton()
@@ -56,5 +66,22 @@ public class DeckController : MonoBehaviour
             iterations++;
         }
 
+    }
+
+    public void DrawCardToHand()
+    {
+        if(activeCards.Count <= 0)
+        {
+            SetupDeck();
+        }
+
+        Card newCard = Instantiate(cardToSpawn, transform.position, transform.rotation);
+
+        newCard.CardSO = activeCards[0];
+        newCard.SetupCard();
+
+        activeCards.RemoveAt(0);
+
+        HandController.Instance.AddCardToHand(newCard);
     }
 }

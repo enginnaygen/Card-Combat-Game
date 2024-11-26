@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class HandController : MonoBehaviour
 {
+    public static HandController Instance;
+
     [SerializeField] List<Card> heldCards = new List<Card>();
 
     [SerializeField] Transform minPos;
@@ -11,16 +13,28 @@ public class HandController : MonoBehaviour
     [SerializeField] List<Vector3> cardPositions = new List<Vector3>();
 
     public List<Vector3> CardPositions => cardPositions;
+
+    private void Awake()
+    {
+        Singelton();
+    }
+    private void Singelton()
+    {
+        if (Instance == null)
+        {
+            Instance = this;
+        }
+        else
+        {
+            Destroy(this.gameObject);
+        }
+    }
     void Start()
     {
         SetCardPositionsInHand();
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+ 
 
     public void SetCardPositionsInHand() //kartlar su sekilde yerlesiyor, sondaki kart en sona bastaki kart en basa yerlesiyor ardaki noktalar hesaplaniyor
     {                                    //sirasiyla en bastan en sona dogru kartla yerlesiyor
@@ -62,5 +76,11 @@ public class HandController : MonoBehaviour
         SetCardPositionsInHand();
 
 
+    }
+
+    public void AddCardToHand(Card card)
+    {
+        heldCards.Add(card);
+        SetCardPositionsInHand();
     }
 }
