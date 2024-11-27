@@ -11,7 +11,10 @@ public class UIController : MonoBehaviour
     [SerializeField] GameObject manaWarningText;
 
     [SerializeField] float manaWarningTime;
+    [SerializeField] GameObject drawCardButton;
     float manaWarningCounter;
+
+    public GameObject DrawCardButton { get { return drawCardButton; } set { drawCardButton = value; } }
 
     private void Awake()
     {
@@ -56,4 +59,10 @@ public class UIController : MonoBehaviour
     {
         playerManaText.text = "Mana: " + manaAmount;
     }
+
+    public void DrawCard()
+    {
+        DeckController.Instance.DrawCardForMana();
+    }
+
 }

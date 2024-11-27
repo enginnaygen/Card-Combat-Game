@@ -13,6 +13,8 @@ public class DeckController : MonoBehaviour
 
     [SerializeField] Card cardToSpawn;
 
+    [SerializeField] int drawCardCost = 2;
+
 
     private void Awake()
     {
@@ -83,5 +85,21 @@ public class DeckController : MonoBehaviour
         activeCards.RemoveAt(0);
 
         HandController.Instance.AddCardToHand(newCard);
+
+        
+    }
+
+    public void DrawCardForMana()
+    {
+        if(BattleController.Instance.PlayerMana >= drawCardCost)
+        {
+            DrawCardToHand();
+            BattleController.Instance.SpendPlayerMana(drawCardCost);
+        }
+        else
+        {
+            UIController.Instance.WarningMana();
+            UIController.Instance.DrawCardButton.SetActive(false);
+        }
     }
 }
