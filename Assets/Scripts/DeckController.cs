@@ -30,10 +30,10 @@ public class DeckController : MonoBehaviour
 
     private void Update()
     {
-        if(Input.GetKeyDown(KeyCode.Space))
+        /*if(Input.GetKeyDown(KeyCode.Space))
         {
             DrawCardToHand();
-        }
+        }*/
     }
 
     private void Singelton()

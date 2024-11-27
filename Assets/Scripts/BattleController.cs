@@ -13,6 +13,9 @@ public class BattleController : MonoBehaviour
     [SerializeField] int startCardAmount = 5;
 
     public int PlayerMana => playerMana;
+
+    public enum TurnOrder { playerActive, playerCardAttacks, enemyActive, enemyCardAttacks }
+    public TurnOrder currentPhase;
     private void Awake()
     {
         Singelton();
@@ -24,6 +27,15 @@ public class BattleController : MonoBehaviour
         UIController.Instance.SetPlayerManaText(playerMana);
 
         DeckController.Instance.DrawMultipleCards(startCardAmount);
+    }
+
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            AdvancePhase();
+        }
+
     }
     private void Singelton()
     {
@@ -41,7 +53,7 @@ public class BattleController : MonoBehaviour
     {
         playerMana -= playerManaCost;
 
-        if(playerMana < 0)
+        if (playerMana < 0)
         {
             playerMana = 0;
         }
@@ -50,4 +62,42 @@ public class BattleController : MonoBehaviour
 
     }
 
+    public void AdvancePhase()
+    {
+        currentPhase++;
+
+        if ((int)currentPhase >= System.Enum.GetValues(typeof(TurnOrder)).Length)
+        {
+            currentPhase = 0;
+
+            switch (currentPhase)
+            {
+                case TurnOrder.playerActive:
+
+                    Debug.Log("player Active");
+                    break;
+                case TurnOrder.playerCardAttacks:
+                    Debug.Log("player Active Attacks");
+
+
+                    break;
+                case TurnOrder.enemyActive:
+                    Debug.Log("enemy Active");
+
+
+                    break;
+                case TurnOrder.enemyCardAttacks:
+
+                    Debug.Log("enemy Active Attacks");
+
+
+                    break;
+
+                default:
+
+                    break;
+            }
+        }
+
+    }
 }
