@@ -15,7 +15,10 @@ public class BattleController : MonoBehaviour
     public int PlayerMana => playerMana;
 
     public enum TurnOrder { playerActive, playerCardAttacks, enemyActive, enemyCardAttacks }
-    public TurnOrder currentPhase;
+    TurnOrder currentPhase;
+
+    public TurnOrder CurrentPhase => currentPhase;
+
     private void Awake()
     {
         Singelton();
@@ -69,6 +72,7 @@ public class BattleController : MonoBehaviour
         if ((int)currentPhase >= System.Enum.GetValues(typeof(TurnOrder)).Length)
         {
             currentPhase = 0;
+        }
 
             switch (currentPhase)
             {
@@ -76,16 +80,19 @@ public class BattleController : MonoBehaviour
 
                     Debug.Log("player Active");
                     break;
+
                 case TurnOrder.playerCardAttacks:
                     Debug.Log("player Active Attacks");
 
 
                     break;
+
                 case TurnOrder.enemyActive:
                     Debug.Log("enemy Active");
 
 
                     break;
+
                 case TurnOrder.enemyCardAttacks:
 
                     Debug.Log("enemy Active Attacks");
@@ -100,4 +107,4 @@ public class BattleController : MonoBehaviour
         }
 
     }
-}
+

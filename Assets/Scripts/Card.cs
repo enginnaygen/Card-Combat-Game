@@ -103,7 +103,7 @@ public class Card : MonoBehaviour
             if (Input.GetMouseButtonDown(0) && !justPressed)
             {
 
-                if (Physics.Raycast(ray, out hit, 100f, whatIsPlacement))
+                if (Physics.Raycast(ray, out hit, 100f, whatIsPlacement) && BattleController.Instance.CurrentPhase == BattleController.TurnOrder.playerActive)
                 {
                     CardPlacement selectedPoint = hit.collider.GetComponent<CardPlacement>();
 
@@ -186,7 +186,7 @@ public class Card : MonoBehaviour
 
     private void OnMouseDown()
     {
-        if(inHand)
+        if(inHand && BattleController.Instance.CurrentPhase == BattleController.TurnOrder.playerActive)
         {
             isSelected = true;
             collider.enabled = false;
