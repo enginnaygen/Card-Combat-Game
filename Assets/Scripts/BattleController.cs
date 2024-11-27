@@ -11,6 +11,7 @@ public class BattleController : MonoBehaviour
     [SerializeField] int startingMana = 4;
     [SerializeField] int playerMana;
     [SerializeField] int startCardAmount = 5;
+    [SerializeField] int CardsToDrawByTurn = 1;
 
     int currentPlayerMaxMana;
 
@@ -95,6 +96,8 @@ public class BattleController : MonoBehaviour
                 }
 
                 FillPlayerMana();
+
+                DeckController.Instance.DrawMultipleCards(CardsToDrawByTurn);
 
                     break;
 
