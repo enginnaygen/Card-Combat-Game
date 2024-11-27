@@ -103,7 +103,8 @@ public class BattleController : MonoBehaviour
 
                 case TurnOrder.playerCardAttacks:
 
-                AdvancePhase();
+                CardPointsController.Instance.PlayerAttack();
+                //AdvancePhase();
 
                     break;
 
