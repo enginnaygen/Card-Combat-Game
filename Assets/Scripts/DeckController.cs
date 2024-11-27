@@ -15,6 +15,8 @@ public class DeckController : MonoBehaviour
 
     [SerializeField] int drawCardCost = 2;
 
+    [SerializeField] float waitBetweenFirstDrawCards = .25f;
+
 
     private void Awake()
     {
@@ -100,6 +102,20 @@ public class DeckController : MonoBehaviour
         {
             UIController.Instance.WarningMana();
             UIController.Instance.DrawCardButton.SetActive(false);
+        }
+    }
+
+    public void DrawMultipleCards(int cardAmount)
+    {
+        StartCoroutine(DrawMultipleCardsCoroutine(cardAmount));
+    }
+
+    IEnumerator DrawMultipleCardsCoroutine(int cardAmount)
+    {
+        for (int i = 0; i < cardAmount; i++)
+        {
+            DrawCardToHand();
+            yield return new WaitForSeconds(waitBetweenFirstDrawCards);
         }
     }
 }

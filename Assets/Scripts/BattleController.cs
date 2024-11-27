@@ -10,6 +10,7 @@ public class BattleController : MonoBehaviour
     [SerializeField] int maxMana = 12;
     [SerializeField] int startingMana = 4;
     [SerializeField] int playerMana;
+    [SerializeField] int startCardAmount = 5;
 
     public int PlayerMana => playerMana;
     private void Awake()
@@ -21,6 +22,8 @@ public class BattleController : MonoBehaviour
     {
         playerMana = startingMana;
         UIController.Instance.SetPlayerManaText(playerMana);
+
+        DeckController.Instance.DrawMultipleCards(startCardAmount);
     }
     private void Singelton()
     {
