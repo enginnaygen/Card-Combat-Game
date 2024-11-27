@@ -27,6 +27,8 @@ public class Card : MonoBehaviour
 
     [SerializeField] LayerMask whatsDestkop, whatIsPlacement;
 
+    [SerializeField] bool isPlayer;
+
     public bool inHand;
     public int handPosition;
 
@@ -54,6 +56,11 @@ public class Card : MonoBehaviour
 
     void Start()
     {
+        if(targetPos == Vector3.zero)
+        {
+            targetPos = transform.position;
+            targetRotation = transform.rotation;
+        }
         //startPos = transform.position;
         SetupCard();
 
@@ -168,7 +175,7 @@ public class Card : MonoBehaviour
 
     private void OnMouseOver()
     {
-        if(inHand)
+        if(inHand && isPlayer)
         {
             MoveToPoint(handController.CardPositions[handPosition] + new Vector3(0f, 1f, .5f), Quaternion.identity);
             /*Vector3 startPos = transform.position;
@@ -181,12 +188,15 @@ public class Card : MonoBehaviour
 
     private void OnMouseExit()
     {
-        MoveToPoint(handController.CardPositions[handPosition], targetRotation);
+        if (inHand && isPlayer)
+        {
+            MoveToPoint(handController.CardPositions[handPosition], targetRotation);
+        }
     }
 
     private void OnMouseDown()
     {
-        if(inHand && BattleController.Instance.CurrentPhase == BattleController.TurnOrder.playerActive)
+        if(inHand && BattleController.Instance.CurrentPhase == BattleController.TurnOrder.playerActive && isPlayer)
         {
             isSelected = true;
             collider.enabled = false;

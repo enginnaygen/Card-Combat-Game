@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class CardPlacement : MonoBehaviour
 {
-    Card activeCard;
+    [SerializeField] Card activeCard;
     [SerializeField] bool isPlayerPoint = false;
 
     public Card ActiveCard { get { return activeCard; } set { activeCard = value; } }

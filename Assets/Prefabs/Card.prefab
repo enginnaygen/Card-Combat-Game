@@ -801,6 +801,7 @@ MonoBehaviour:
   whatIsPlacement:
     serializedVersion: 2
     m_Bits: 128
+  isPlayer: 1
   inHand: 0
   handPosition: 0
 --- !u!65 &5617413912091780920
