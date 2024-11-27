@@ -12,9 +12,12 @@ public class UIController : MonoBehaviour
 
     [SerializeField] float manaWarningTime;
     [SerializeField] GameObject drawCardButton;
+    [SerializeField] GameObject endTurnButton;
+
     float manaWarningCounter;
 
     public GameObject DrawCardButton { get { return drawCardButton; } set { drawCardButton = value; } }
+    public GameObject EndTurnButton { get { return endTurnButton; } set { endTurnButton = value; } }
 
     private void Awake()
     {
@@ -63,6 +66,12 @@ public class UIController : MonoBehaviour
     public void DrawCard()
     {
         DeckController.Instance.DrawCardForMana();
+    }
+
+    public void EndPlayerTurn()
+    {
+        
+        BattleController.Instance.EndPlayerTurn();
     }
 
 }

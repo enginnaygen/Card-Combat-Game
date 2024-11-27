@@ -26,10 +26,15 @@ public class BattleController : MonoBehaviour
 
     void Start()
     {
-        playerMana = startingMana;
-        UIController.Instance.SetPlayerManaText(playerMana);
+        FillPlayerMana();
 
         DeckController.Instance.DrawMultipleCards(startCardAmount);
+    }
+
+    private void FillPlayerMana()
+    {
+        playerMana = startingMana;
+        UIController.Instance.SetPlayerManaText(playerMana);
     }
 
     private void Update()
@@ -78,33 +83,44 @@ public class BattleController : MonoBehaviour
             {
                 case TurnOrder.playerActive:
 
-                    Debug.Log("player Active");
+                UIController.Instance.EndTurnButton.SetActive(true);
+                UIController.Instance.DrawCardButton.SetActive(true);
+
+                FillPlayerMana();
+
                     break;
 
                 case TurnOrder.playerCardAttacks:
-                    Debug.Log("player Active Attacks");
 
+                AdvancePhase();
 
                     break;
 
                 case TurnOrder.enemyActive:
-                    Debug.Log("enemy Active");
 
+                AdvancePhase();
 
                     break;
 
                 case TurnOrder.enemyCardAttacks:
 
-                    Debug.Log("enemy Active Attacks");
+                AdvancePhase();
 
 
-                    break;
+                break;
 
                 default:
 
                     break;
             }
         }
+
+    public void EndPlayerTurn()
+    {
+        UIController.Instance.EndTurnButton.SetActive(false);
+        UIController.Instance.DrawCardButton.SetActive(false);
+        AdvancePhase();
+    }
 
     }
 
