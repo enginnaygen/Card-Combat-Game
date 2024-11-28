@@ -40,8 +40,9 @@ public class Card : MonoBehaviour
     bool isSelected;
     bool justPressed;
 
-    CardPlacement cardAssingedPlace;
+    [SerializeField] CardPlacement cardAssingedPlace;
     public CardScriptableObject CardSO { get { return cardSO; } set { cardSO = value; } }
+    public int AttackPower => attackPower;
 
 
 
@@ -76,9 +77,7 @@ public class Card : MonoBehaviour
         actionDescriptionText.text = cardSO.actionDescription;
         loreText.text = cardSO.cardLore;
 
-        healthText.text = currentHealth.ToString();
-        attackPowerText.text = attackPower.ToString();
-        costText.text = manaCost.ToString();
+        UpdateCardDisplay();
 
         characterArt.sprite = cardSO.characterSprite;
         backgroundArt.sprite = cardSO.bgSprite;
@@ -171,6 +170,26 @@ public class Card : MonoBehaviour
         targetPos = pointToMoveTo;
         targetRotation = pointToRollTo;
 
+    }
+
+    public void DamageCard(int damageAmount)
+    {
+        currentHealth -= damageAmount;
+        if(currentHealth <=0)
+        {
+            currentHealth = 0;
+            cardAssingedPlace.ActiveCard = null;
+            Destroy(gameObject);
+        }
+
+        UpdateCardDisplay();
+    }
+
+    public void UpdateCardDisplay()
+    {
+        healthText.text = currentHealth.ToString();
+        attackPowerText.text = attackPower.ToString();
+        costText.text = manaCost.ToString();
     }
 
     private void OnMouseOver()
