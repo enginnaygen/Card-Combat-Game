@@ -44,13 +44,45 @@ public class CardPointsController : MonoBehaviour
                 if(enemyCardPoints[i].ActiveCard != null)
                 {
                     enemyCardPoints[i].ActiveCard.DamageCard(playerCardPoints[i].ActiveCard.AttackPower);
-                    playerCardPoints[i].ActiveCard.Animator.SetTrigger("Attack");
                 }
                 else
                 {
                     //attack the enemies overall health
                 }
 
+                playerCardPoints[i].ActiveCard.Animator.SetTrigger("Attack");
+                yield return new WaitForSeconds(timeBetweenAttacks);
+
+            }
+        }
+
+        CheckAssignedCards();
+        BattleController.Instance.AdvancePhase();
+    }
+
+    public void EnemyAttack()
+    {
+        StartCoroutine(EnemyAttackCO());
+    }
+
+    IEnumerator EnemyAttackCO()
+    {
+        yield return new WaitForSeconds(timeBetweenAttacks);
+
+        for (int i = 0; i < enemyCardPoints.Length; i++)
+        {
+            if (enemyCardPoints[i].ActiveCard != null)
+            {
+                if (playerCardPoints[i].ActiveCard != null)
+                {
+                    playerCardPoints[i].ActiveCard.DamageCard(enemyCardPoints[i].ActiveCard.AttackPower);
+                }
+                else
+                {
+                    //attack the enemies overall health
+                }
+
+                enemyCardPoints[i].ActiveCard.Animator.SetTrigger("Attack");
                 yield return new WaitForSeconds(timeBetweenAttacks);
 
             }
@@ -60,7 +92,6 @@ public class CardPointsController : MonoBehaviour
 
         BattleController.Instance.AdvancePhase();
     }
-
     public void CheckAssignedCards() //extra check for safe
     {
         foreach (CardPlacement point in enemyCardPoints)

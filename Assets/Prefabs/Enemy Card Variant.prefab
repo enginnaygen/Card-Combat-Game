@@ -8,6 +8,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 327129111906229014, guid: 9f5ab4b8111ae364f9620fe375ab8d14, type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: 67dd66003177ac84697afa2533683fde, type: 2}
     - target: {fileID: 2042330878334441201, guid: 9f5ab4b8111ae364f9620fe375ab8d14, type: 3}
       propertyPath: m_fontColor.b
       value: 1
