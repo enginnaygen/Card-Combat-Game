@@ -16,10 +16,16 @@ public class UIController : MonoBehaviour
     [SerializeField] GameObject drawCardButton;
     [SerializeField] GameObject endTurnButton;
 
+    [SerializeField] UIDamageIndicator playerDamage;
+    [SerializeField] UIDamageIndicator enemyDamage;
+
     float manaWarningCounter;
 
     public GameObject DrawCardButton { get { return drawCardButton; } set { drawCardButton = value; } }
     public GameObject EndTurnButton { get { return endTurnButton; } set { endTurnButton = value; } }
+
+    public UIDamageIndicator PlayerDamage => playerDamage;
+    public UIDamageIndicator EnemyDamage => enemyDamage;
 
     private void Awake()
     {
