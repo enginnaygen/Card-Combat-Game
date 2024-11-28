@@ -11,7 +11,9 @@ public class BattleController : MonoBehaviour
     [SerializeField] int startingMana = 4;
     [SerializeField] int playerMana;
     [SerializeField] int startCardAmount = 5;
-    [SerializeField] int CardsToDrawByTurn = 1;
+    [SerializeField] int cardsToDrawByTurn = 1;
+    [SerializeField] int playerHealth;
+    [SerializeField] int enemyHealth;
     [SerializeField] Transform discardPoint;
 
     int currentPlayerMaxMana;
@@ -99,7 +101,7 @@ public class BattleController : MonoBehaviour
 
                 FillPlayerMana();
 
-                DeckController.Instance.DrawMultipleCards(CardsToDrawByTurn);
+                DeckController.Instance.DrawMultipleCards(cardsToDrawByTurn);
 
                     break;
 
@@ -136,5 +138,37 @@ public class BattleController : MonoBehaviour
         AdvancePhase();
     }
 
+    public void DamagePlayer(int damageAmount)
+    {
+        if(playerHealth > 0)
+        {
+            playerHealth -= damageAmount;
+
+            if(playerHealth<=0)
+            {
+                playerHealth = 0;
+
+                //end battle
+
+            }
+        }
     }
+
+    public void DamageEnemy(int damageAmount)
+    {
+        if (enemyHealth > 0)
+        {
+            enemyHealth -= damageAmount;
+
+            if (enemyHealth <= 0)
+            {
+                enemyHealth = 0;
+
+                //end battle
+
+            }
+        }
+    }
+
+}
 
