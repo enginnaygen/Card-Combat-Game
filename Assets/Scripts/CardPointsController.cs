@@ -44,6 +44,7 @@ public class CardPointsController : MonoBehaviour
                 if(enemyCardPoints[i].ActiveCard != null)
                 {
                     enemyCardPoints[i].ActiveCard.DamageCard(playerCardPoints[i].ActiveCard.AttackPower);
+                    playerCardPoints[i].ActiveCard.Animator.SetTrigger("Attack");
                 }
                 else
                 {
@@ -64,7 +65,7 @@ public class CardPointsController : MonoBehaviour
     {
         foreach (CardPlacement point in enemyCardPoints)
         {
-            if(point.ActiveCard.CurrentHealth <=0)
+            if(point.ActiveCard != null && point.ActiveCard.CurrentHealth <=0)
             {
                 point.ActiveCard = null;
             }
@@ -72,7 +73,7 @@ public class CardPointsController : MonoBehaviour
 
         foreach (CardPlacement point in playerCardPoints)
         {
-            if (point.ActiveCard.CurrentHealth <= 0)
+            if (point.ActiveCard != null && point.ActiveCard.CurrentHealth <= 0)
             {
                 point.ActiveCard = null;
             }

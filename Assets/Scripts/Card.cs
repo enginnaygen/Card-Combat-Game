@@ -29,6 +29,8 @@ public class Card : MonoBehaviour
 
     [SerializeField] bool isPlayer;
 
+    [SerializeField] Animator animator;
+
     public bool inHand;
     public int handPosition;
 
@@ -42,6 +44,7 @@ public class Card : MonoBehaviour
 
     [SerializeField] CardPlacement cardAssingedPlace;
     public CardScriptableObject CardSO { get { return cardSO; } set { cardSO = value; } }
+    public Animator Animator { get { return animator; } set { animator = value; } }
     public int AttackPower => attackPower;
     public int CurrentHealth => currentHealth;
 
@@ -181,9 +184,11 @@ public class Card : MonoBehaviour
             currentHealth = 0;
             cardAssingedPlace.ActiveCard = null;
             MoveToPoint(BattleController.Instance.DiscardPoint.position, BattleController.Instance.DiscardPoint.rotation);
+            animator.SetTrigger("Jump");
             Destroy(gameObject, 3f);
         }
 
+        animator.SetTrigger("Hurt");
         UpdateCardDisplay();
     }
 

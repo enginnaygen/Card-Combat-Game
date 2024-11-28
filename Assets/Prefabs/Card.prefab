@@ -368,6 +368,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2579904086295753470}
+  - component: {fileID: 327129111906229014}
   m_Layer: 0
   m_Name: Model
   m_TagString: Untagged
@@ -392,6 +393,27 @@ Transform:
   - {fileID: 8065502905326145689}
   m_Father: {fileID: 7788567111379848611}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!95 &327129111906229014
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3264333907467457891}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 87b49e33859dcc141ac27693c6f6549c, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &5899129016903667204
 GameObject:
   m_ObjectHideFlags: 0
@@ -802,8 +824,10 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 128
   isPlayer: 1
+  animator: {fileID: 327129111906229014}
   inHand: 0
   handPosition: 0
+  cardAssingedPlace: {fileID: 0}
 --- !u!65 &5617413912091780920
 BoxCollider:
   m_ObjectHideFlags: 0
