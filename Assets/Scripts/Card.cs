@@ -43,6 +43,7 @@ public class Card : MonoBehaviour
     [SerializeField] CardPlacement cardAssingedPlace;
     public CardScriptableObject CardSO { get { return cardSO; } set { cardSO = value; } }
     public int AttackPower => attackPower;
+    public int CurrentHealth => currentHealth;
 
 
 
@@ -179,7 +180,8 @@ public class Card : MonoBehaviour
         {
             currentHealth = 0;
             cardAssingedPlace.ActiveCard = null;
-            Destroy(gameObject);
+            MoveToPoint(BattleController.Instance.DiscardPoint.position, BattleController.Instance.DiscardPoint.rotation);
+            Destroy(gameObject, 3f);
         }
 
         UpdateCardDisplay();

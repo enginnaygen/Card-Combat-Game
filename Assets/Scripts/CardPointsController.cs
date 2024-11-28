@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using UnityEngine;
 
 public class CardPointsController : MonoBehaviour
@@ -54,6 +55,27 @@ public class CardPointsController : MonoBehaviour
             }
         }
 
+        CheckAssignedCards();
+
         BattleController.Instance.AdvancePhase();
+    }
+
+    public void CheckAssignedCards() //extra check for safe
+    {
+        foreach (CardPlacement point in enemyCardPoints)
+        {
+            if(point.ActiveCard.CurrentHealth <=0)
+            {
+                point.ActiveCard = null;
+            }
+        }
+
+        foreach (CardPlacement point in playerCardPoints)
+        {
+            if (point.ActiveCard.CurrentHealth <= 0)
+            {
+                point.ActiveCard = null;
+            }
+        }
     }
 }

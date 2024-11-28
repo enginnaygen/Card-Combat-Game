@@ -12,10 +12,12 @@ public class BattleController : MonoBehaviour
     [SerializeField] int playerMana;
     [SerializeField] int startCardAmount = 5;
     [SerializeField] int CardsToDrawByTurn = 1;
+    [SerializeField] Transform discardPoint;
 
     int currentPlayerMaxMana;
 
     public int PlayerMana => playerMana;
+    public Transform DiscardPoint => discardPoint;
 
     public enum TurnOrder { playerActive, playerCardAttacks, enemyActive, enemyCardAttacks }
     TurnOrder currentPhase;
