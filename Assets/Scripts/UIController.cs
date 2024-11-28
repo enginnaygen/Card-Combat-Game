@@ -8,6 +8,8 @@ public class UIController : MonoBehaviour
     public static UIController Instance;
 
     [SerializeField] TMP_Text playerManaText;
+    [SerializeField] TMP_Text playerHealthText;
+    [SerializeField] TMP_Text enemyHealthText;
     [SerializeField] GameObject manaWarningText;
 
     [SerializeField] float manaWarningTime;
@@ -61,6 +63,16 @@ public class UIController : MonoBehaviour
     public void SetPlayerManaText(int manaAmount)
     {
         playerManaText.text = "Mana: " + manaAmount;
+    }
+
+    public void SetPlayerHealthText(int healthAmount)
+    {
+        playerHealthText.text = "Player Health: " + healthAmount;
+    }
+
+    public void SetEnemyHealthText(int healthAmount)
+    {
+        enemyHealthText.text = "Enemy Health: " + healthAmount;
     }
 
     public void DrawCard()

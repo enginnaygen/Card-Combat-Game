@@ -19,6 +19,7 @@ public class BattleController : MonoBehaviour
     int currentPlayerMaxMana;
 
     public int PlayerMana => playerMana;
+    public int PlayerHealth => playerHealth;
     public Transform DiscardPoint => discardPoint;
 
     public enum TurnOrder { playerActive, playerCardAttacks, enemyActive, enemyCardAttacks }
@@ -37,6 +38,9 @@ public class BattleController : MonoBehaviour
         DeckController.Instance.DrawMultipleCards(startCardAmount);
         currentPlayerMaxMana = startingMana;
         FillPlayerMana();
+        UIController.Instance.SetPlayerHealthText(playerHealth);
+        UIController.Instance.SetEnemyHealthText(enemyHealth);
+
     }
 
     private void FillPlayerMana()
@@ -151,6 +155,9 @@ public class BattleController : MonoBehaviour
                 //end battle
 
             }
+
+            UIController.Instance.SetPlayerHealthText(playerHealth);
+
         }
     }
 
@@ -167,6 +174,8 @@ public class BattleController : MonoBehaviour
                 //end battle
 
             }
+
+            UIController.Instance.SetEnemyHealthText(enemyHealth);
         }
     }
 
