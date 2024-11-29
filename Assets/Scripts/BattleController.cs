@@ -8,8 +8,10 @@ public class BattleController : MonoBehaviour
     public static BattleController Instance;
 
     [SerializeField] int maxMana = 12;
-    [SerializeField] int startingMana = 4;
+    [SerializeField] int playerStartingMana = 4;
+    [SerializeField] int enemyStartingMana = 4;
     [SerializeField] int playerMana;
+    [SerializeField] int enemyMana;
     [SerializeField] int startCardAmount = 5;
     [SerializeField] int cardsToDrawByTurn = 1;
     [SerializeField] int playerHealth;
@@ -36,7 +38,7 @@ public class BattleController : MonoBehaviour
     {
        
         DeckController.Instance.DrawMultipleCards(startCardAmount);
-        currentPlayerMaxMana = startingMana;
+        currentPlayerMaxMana = playerStartingMana;
         FillPlayerMana();
         UIController.Instance.SetPlayerHealthText(playerHealth);
         UIController.Instance.SetEnemyHealthText(enemyHealth);

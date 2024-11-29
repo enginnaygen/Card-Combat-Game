@@ -17,6 +17,10 @@ public class EnemyController : MonoBehaviour
 
     [SerializeField] AIType enemyAIType;
 
+    List<CardScriptableObject> cardsInHand = new List<CardScriptableObject>();
+
+    [SerializeField] int startHandSize;
+
     private void Awake()
     {
         Singleton();
@@ -24,13 +28,13 @@ public class EnemyController : MonoBehaviour
     void Start()
     {
         SetupDeck();
+
+        if(enemyAIType != AIType.placeFromDeck)
+        {
+            SetupHand();
+        }
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 
     void Singleton()
     {
@@ -90,13 +94,19 @@ public class EnemyController : MonoBehaviour
 
         CardPlacement selectedPlacement = enemyCardPlacement[randomSelectedPlacement];
 
-        while(selectedPlacement.ActiveCard != null && enemyCardPlacement.Count > 0)
+        if(enemyAIType == AIType.placeFromDeck || enemyAIType == AIType.handRandomPlace)
         {
-            randomSelectedPlacement = Random.Range(0, enemyCardPlacement.Count);
-            selectedPlacement = enemyCardPlacement[randomSelectedPlacement];
-            enemyCardPlacement.RemoveAt(randomSelectedPlacement);
+            enemyCardPlacement.Remove(selectedPlacement);
 
+            while (selectedPlacement.ActiveCard != null && enemyCardPlacement.Count > 0)
+            {
+                randomSelectedPlacement = Random.Range(0, enemyCardPlacement.Count);
+                selectedPlacement = enemyCardPlacement[randomSelectedPlacement];
+                enemyCardPlacement.RemoveAt(randomSelectedPlacement);
+
+            }
         }
+        
 
         switch (enemyAIType)
         {
@@ -139,5 +149,20 @@ public class EnemyController : MonoBehaviour
 
         BattleController.Instance.AdvancePhase();
 
+    }
+
+    void SetupHand()
+    {
+        
+        for (int i = 0; i < startHandSize; i++)
+        {
+            if (activeCards.Count <= 0)
+            {
+                SetupDeck();
+            }
+
+            cardsInHand.Add(activeCards[0]);
+            activeCards.RemoveAt(0);
+        }
     }
 }

@@ -288,6 +288,37 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1856418455}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: -10}
+--- !u!1 &190924893
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 190924894}
+  m_Layer: 0
+  m_Name: Card Spawn Point
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &190924894
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 190924893}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: 1, w: 0.0000029504295}
+  m_LocalPosition: {x: 0, y: 0, z: 6}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1145403299}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 180}
 --- !u!1 &222331751
 GameObject:
   m_ObjectHideFlags: 0
@@ -351,6 +382,10 @@ PrefabInstance:
     - target: {fileID: 4849105889675757673, guid: f8473da511bba4445a113b2966cce281, type: 3}
       propertyPath: m_Name
       value: Enemy Card (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 4849105889675757673, guid: f8473da511bba4445a113b2966cce281, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7726922085449933357, guid: f8473da511bba4445a113b2966cce281, type: 3}
       propertyPath: cardAssingedPlace
@@ -520,7 +555,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e1746310940f92d46a2a22f7698ebe1f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  activeCard: {fileID: 1153444643}
+  activeCard: {fileID: 0}
   isPlayerPoint: 0
 --- !u!1 &293216486
 GameObject:
@@ -1150,8 +1185,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxMana: 12
-  startingMana: 4
+  playerStartingMana: 4
+  enemyStartingMana: 4
   playerMana: 0
+  enemyMana: 0
   startCardAmount: 5
   cardsToDrawByTurn: 1
   playerHealth: 50
@@ -2167,17 +2204,60 @@ Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 1f89a578ed4ecee4b9b3d0429697416a, type: 3}
   m_PrefabInstance: {fileID: 342133520}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1153444643 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 7726922085449933357, guid: f8473da511bba4445a113b2966cce281, type: 3}
-  m_PrefabInstance: {fileID: 267533906}
+--- !u!1 &1145403297
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1145403299}
+  - component: {fileID: 1145403298}
+  m_Layer: 0
+  m_Name: Enemy Controller
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1145403298
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1145403297}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fa4ce0d3d072682438e1d4709b74d488, type: 3}
+  m_Script: {fileID: 11500000, guid: 9da4b0edc791c6344bc9c9e531f8963a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  delay: 0.75
+  deckToUse:
+  - {fileID: 11400000, guid: 54a9602f1d99c9b4783f8120041ed552, type: 2}
+  - {fileID: 11400000, guid: e04513eb364382c418963ad7dd8dbc6a, type: 2}
+  - {fileID: 11400000, guid: 307fdfc77dc17ca4fafd79eb87ea4c3c, type: 2}
+  cardToSpawn: {fileID: 7726922085449933357, guid: f8473da511bba4445a113b2966cce281, type: 3}
+  cardToSpawnPoint: {fileID: 190924894}
+  enemyAIType: 0
+  startHandSize: 0
+--- !u!4 &1145403299
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1145403297}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 190924894}
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1166701425
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2404,6 +2484,10 @@ PrefabInstance:
     - target: {fileID: 4849105889675757673, guid: f8473da511bba4445a113b2966cce281, type: 3}
       propertyPath: m_Name
       value: Enemy Card (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 4849105889675757673, guid: f8473da511bba4445a113b2966cce281, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7726922085449933357, guid: f8473da511bba4445a113b2966cce281, type: 3}
       propertyPath: cardSO
@@ -2993,19 +3077,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e1746310940f92d46a2a22f7698ebe1f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  activeCard: {fileID: 1534998064}
+  activeCard: {fileID: 0}
   isPlayerPoint: 0
---- !u!114 &1534998064 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 7726922085449933357, guid: f8473da511bba4445a113b2966cce281, type: 3}
-  m_PrefabInstance: {fileID: 6957674978740113938}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fa4ce0d3d072682438e1d4709b74d488, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1553232535
 GameObject:
   m_ObjectHideFlags: 0
@@ -3246,7 +3319,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e1746310940f92d46a2a22f7698ebe1f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  activeCard: {fileID: 1994381067}
+  activeCard: {fileID: 0}
   isPlayerPoint: 0
 --- !u!1 &1856418453
 GameObject:
@@ -3692,17 +3765,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 774944589}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1994381067 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 7726922085449933357, guid: f8473da511bba4445a113b2966cce281, type: 3}
-  m_PrefabInstance: {fileID: 1337148152}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fa4ce0d3d072682438e1d4709b74d488, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &2021964932
 GameObject:
   m_ObjectHideFlags: 0
@@ -3744,7 +3806,7 @@ MonoBehaviour:
   - {fileID: 1501737464}
   - {fileID: 1642526515}
   - {fileID: 1964570189}
-  timeBetweenAttacks: 0.25
+  timeBetweenAttacks: 0.5
 --- !u!4 &2021964934
 Transform:
   m_ObjectHideFlags: 0
@@ -3930,6 +3992,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Enemy Card
       objectReference: {fileID: 0}
+    - target: {fileID: 4849105889675757673, guid: f8473da511bba4445a113b2966cce281, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7726922085449933357, guid: f8473da511bba4445a113b2966cce281, type: 3}
       propertyPath: cardAssingedPlace
       value: 
@@ -3996,3 +4062,4 @@ SceneRoots:
   - {fileID: 267533906}
   - {fileID: 2021964934}
   - {fileID: 1166701425}
+  - {fileID: 1145403299}
