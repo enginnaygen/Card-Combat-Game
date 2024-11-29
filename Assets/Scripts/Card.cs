@@ -47,6 +47,7 @@ public class Card : MonoBehaviour
     public Animator Animator { get { return animator; } set { animator = value; } }
     public int AttackPower => attackPower;
     public int CurrentHealth => currentHealth;
+    public CardPlacement CardAssingedPlace { get { return cardAssingedPlace; } set { cardAssingedPlace = value; } }
 
 
 

@@ -10,6 +10,8 @@ public class EnemyController : MonoBehaviour
     [SerializeField] List<CardScriptableObject> deckToUse = new List<CardScriptableObject>();
     List<CardScriptableObject> activeCards = new List<CardScriptableObject>();
 
+    [SerializeField] Card cardToSpawn;
+    [SerializeField] Transform cardToSpawnPoint;
     private void Awake()
     {
         Singleton();
@@ -71,6 +73,36 @@ public class EnemyController : MonoBehaviour
         if(activeCards.Count <= 0)
         {
             SetupDeck();
+        }
+
+        yield return new WaitForSeconds(delay);
+
+
+        List<CardPlacement> enemyCardPlacement = new List<CardPlacement>();
+        enemyCardPlacement.AddRange(CardPointsController.Instance.enemyCardPoints);
+
+        int randomSelectedPlacement = Random.Range(0, enemyCardPlacement.Count);
+
+        CardPlacement selectedPlacement = enemyCardPlacement[randomSelectedPlacement];
+
+        while(selectedPlacement.ActiveCard != null && enemyCardPlacement.Count > 0)
+        {
+            randomSelectedPlacement = Random.Range(0, enemyCardPlacement.Count);
+            selectedPlacement = enemyCardPlacement[randomSelectedPlacement];
+            enemyCardPlacement.RemoveAt(randomSelectedPlacement);
+
+        }
+
+        if(selectedPlacement.ActiveCard == null)
+        {
+            Card newCard = Instantiate(cardToSpawn, cardToSpawnPoint.position, cardToSpawnPoint.rotation);
+            newCard.CardSO = activeCards[0];
+            activeCards.RemoveAt(0);
+            newCard.SetupCard();
+            newCard.MoveToPoint(selectedPlacement.transform.position + new Vector3(0f, 0f, .38f), Quaternion.identity);
+
+            selectedPlacement.ActiveCard = newCard;
+            newCard.CardAssingedPlace = selectedPlacement;
         }
 
         yield return new WaitForSeconds(delay);
