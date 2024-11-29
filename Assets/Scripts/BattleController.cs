@@ -118,13 +118,13 @@ public class BattleController : MonoBehaviour
 
                 case TurnOrder.enemyActive:
 
-                CardPointsController.Instance.EnemyAttack();
+                EnemyController.Instance.StartEnemyAction();
 
                     break;
 
                 case TurnOrder.enemyCardAttacks:
 
-                AdvancePhase();
+                CardPointsController.Instance.EnemyAttack();
 
 
                 break;

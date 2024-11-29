@@ -2383,7 +2383,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damageIndicator: {fileID: 1244182871}
-  moveSpeed: 100
+  moveSpeed: 150
   lifeTime: 3
 --- !u!222 &1244182873
 CanvasRenderer:
@@ -2864,7 +2864,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damageIndicator: {fileID: 1477097673}
-  moveSpeed: 100
+  moveSpeed: 150
   lifeTime: 3
 --- !u!222 &1477097675
 CanvasRenderer:
