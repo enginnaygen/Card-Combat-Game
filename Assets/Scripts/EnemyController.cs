@@ -12,6 +12,11 @@ public class EnemyController : MonoBehaviour
 
     [SerializeField] Card cardToSpawn;
     [SerializeField] Transform cardToSpawnPoint;
+
+    public enum AIType { placeFromDeck, handRandomPlace, handDefensive, handOffensive}
+
+    [SerializeField] AIType enemyAIType;
+
     private void Awake()
     {
         Singleton();
@@ -93,17 +98,42 @@ public class EnemyController : MonoBehaviour
 
         }
 
-        if(selectedPlacement.ActiveCard == null)
+        switch (enemyAIType)
         {
-            Card newCard = Instantiate(cardToSpawn, cardToSpawnPoint.position, cardToSpawnPoint.rotation);
-            newCard.CardSO = activeCards[0];
-            activeCards.RemoveAt(0);
-            newCard.SetupCard();
-            newCard.MoveToPoint(selectedPlacement.transform.position + new Vector3(0f, 0f, .38f), Quaternion.identity);
+            case AIType.placeFromDeck:
 
-            selectedPlacement.ActiveCard = newCard;
-            newCard.CardAssingedPlace = selectedPlacement;
+                if (selectedPlacement.ActiveCard == null)
+                {
+                    Card newCard = Instantiate(cardToSpawn, cardToSpawnPoint.position, cardToSpawnPoint.rotation);
+                    newCard.CardSO = activeCards[0];
+                    activeCards.RemoveAt(0);
+                    newCard.SetupCard();
+                    newCard.MoveToPoint(selectedPlacement.transform.position + new Vector3(0f, 0f, .38f), Quaternion.identity);
+
+                    selectedPlacement.ActiveCard = newCard;
+                    newCard.CardAssingedPlace = selectedPlacement;
+                } 
+
+                break;
+            case AIType.handRandomPlace:
+
+
+                break;
+            case AIType.handDefensive:
+
+
+                break;
+            case AIType.handOffensive:
+
+
+                break;
+            default:
+
+
+                break;
         }
+
+       
 
         yield return new WaitForSeconds(delay);
 
