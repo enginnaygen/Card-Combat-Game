@@ -120,7 +120,7 @@ public class EnemyController : MonoBehaviour
             }
         }
 
-
+        //buraya kadar olan nokta elimize kart doldurma ve karti nereye koyacagimizi secme
         CardScriptableObject selectedCard = null;
 
         switch (enemyAIType)
@@ -162,7 +162,7 @@ public class EnemyController : MonoBehaviour
 
                     }
 
-
+                    //buraya kadar olan kisimda manamiz kadar ve yerlestirilecek alanimiz kadar kart secip yerlestiriyoruz
                 }
 
 
@@ -170,6 +170,37 @@ public class EnemyController : MonoBehaviour
                 break;
             case AIType.handDefensive:
 
+                selectedCard = SelectedDefensiveCard();
+
+                int iteration = 0;
+
+                while (selectedPlacement.ActiveCard != null && enemyCardPlacement.Count > 0)
+                {
+                    randomSelectedPlacement = Random.Range(0, enemyCardPlacement.Count);
+                    selectedPlacement = enemyCardPlacement[randomSelectedPlacement];
+                    enemyCardPlacement.RemoveAt(randomSelectedPlacement);
+
+                }
+
+                while (selectedCard != null && selectedPlacement.ActiveCard == null && iteration < 50)
+                {
+                    PlayCard(selectedCard, selectedPlacement);
+
+                    selectedCard = SelectedCardToPlay();
+
+                    iteration++;
+                    yield return new WaitForSeconds(CardPointsController.Instance.TimeBetWeenAttacks);
+
+
+                    while (selectedPlacement.ActiveCard != null && enemyCardPlacement.Count > 0)
+                    {
+                        randomSelectedPlacement = Random.Range(0, enemyCardPlacement.Count);
+                        selectedPlacement = enemyCardPlacement[randomSelectedPlacement];
+                        enemyCardPlacement.RemoveAt(randomSelectedPlacement);
+
+                    }
+                    //buraya kadar olan kisimda manamiz kadar ve yerlestirilecek alanimiz kadar kart secip yerlestiriyoruz
+                }
 
                 break;
             case AIType.handOffensive:
@@ -242,4 +273,36 @@ public class EnemyController : MonoBehaviour
 
         return cardToPlay;
     }
+
+    CardScriptableObject SelectedDefensiveCard()
+    {
+        CardScriptableObject cardToPlay = null;
+
+        List<CardScriptableObject> cardsToPlay = new List<CardScriptableObject>();
+
+        foreach (CardScriptableObject card in cardsInHand)
+        {
+            int cardCurrentHealth = card.currentHealth;
+
+            if (card.manaCost <= BattleController.Instance.EnemyMana)
+            {
+                if(cardsToPlay.Count > 0 && cardCurrentHealth > cardsToPlay[cardsToPlay.Count-1].currentHealth)
+                {
+                    cardsToPlay.Add(card);
+                    cardsToPlay[0] = cardsToPlay[cardsToPlay.Count - 1];
+                 
+                }
+                else
+                {
+                    cardsToPlay.Add(card);
+
+                }
+            }
+            
+        }
+
+        cardToPlay = cardsToPlay[0];
+        return cardToPlay;
+    }
+
 }

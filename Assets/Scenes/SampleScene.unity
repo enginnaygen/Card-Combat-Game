@@ -1186,7 +1186,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxMana: 12
   playerStartingMana: 4
-  enemyStartingMana: 4
+  enemyStartingMana: 5
   playerMana: 0
   enemyMana: 0
   startCardAmount: 5
