@@ -12,6 +12,8 @@ public class CardPointsController : MonoBehaviour
 
     [SerializeField] float timeBetweenAttacks = .25f;
 
+    public float TimeBetWeenAttacks => timeBetweenAttacks;
+
     private void Awake()
     {
         Singelton();
