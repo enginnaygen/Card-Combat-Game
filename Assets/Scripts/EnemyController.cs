@@ -84,6 +84,19 @@ public class EnemyController : MonoBehaviour
             SetupDeck();
         }
 
+        if(enemyAIType != AIType.placeFromDeck)
+        {
+            for (int i = 0; i < BattleController.Instance.CardsToDrawBuTurn; i++)
+            {
+                cardsInHand.Add(activeCards[0]);
+                activeCards.RemoveAt(0);
+
+                if(activeCards.Count <= 0)
+                {
+                    SetupDeck();
+                }
+            }
+        }
         yield return new WaitForSeconds(delay);
 
 

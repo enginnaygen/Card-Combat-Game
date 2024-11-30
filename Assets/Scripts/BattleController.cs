@@ -24,6 +24,7 @@ public class BattleController : MonoBehaviour
     public int PlayerMana => playerMana;
     public int PlayerHealth => playerHealth;
     public int EnemyMana => enemyMana;
+    public int CardsToDrawBuTurn => cardsToDrawByTurn;
     public Transform DiscardPoint => discardPoint;
 
     public enum TurnOrder { playerActive, playerCardAttacks, enemyActive, enemyCardAttacks }
