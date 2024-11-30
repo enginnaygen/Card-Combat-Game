@@ -19,9 +19,11 @@ public class BattleController : MonoBehaviour
     [SerializeField] Transform discardPoint;
 
     int currentPlayerMaxMana;
+    int currentEnemyMaxMana;
 
     public int PlayerMana => playerMana;
     public int PlayerHealth => playerHealth;
+    public int EnemyMana => enemyMana;
     public Transform DiscardPoint => discardPoint;
 
     public enum TurnOrder { playerActive, playerCardAttacks, enemyActive, enemyCardAttacks }
@@ -39,17 +41,14 @@ public class BattleController : MonoBehaviour
        
         DeckController.Instance.DrawMultipleCards(startCardAmount);
         currentPlayerMaxMana = playerStartingMana;
+        currentEnemyMaxMana = enemyStartingMana;
         FillPlayerMana();
+        FillEnemyMana();
         UIController.Instance.SetPlayerHealthText(playerHealth);
         UIController.Instance.SetEnemyHealthText(enemyHealth);
 
     }
 
-    private void FillPlayerMana()
-    {
-        playerMana = currentPlayerMaxMana;
-        UIController.Instance.SetPlayerManaText(playerMana);
-    }
 
     private void Update()
     {
@@ -71,6 +70,18 @@ public class BattleController : MonoBehaviour
         }
     }
 
+    private void FillPlayerMana()
+    {
+        playerMana = currentPlayerMaxMana;
+        UIController.Instance.SetPlayerManaText(playerMana);
+    }
+
+    void FillEnemyMana()
+    {
+        enemyMana = currentEnemyMaxMana;
+        UIController.Instance.SetEnemyManaText(enemyMana);
+    }
+
     public void SpendPlayerMana(int playerManaCost)
     {
         playerMana -= playerManaCost;
@@ -82,6 +93,18 @@ public class BattleController : MonoBehaviour
 
         UIController.Instance.SetPlayerManaText(playerMana);
 
+    }
+
+    public void SpendEnemyMana(int enemyManaCost)
+    {
+        enemyMana -= enemyManaCost;
+
+        if(enemyMana <0)
+        {
+            enemyMana = 0;
+        }
+
+        UIController.Instance.SetEnemyManaText(enemyMana);
     }
 
     public void AdvancePhase()
@@ -121,6 +144,12 @@ public class BattleController : MonoBehaviour
                 case TurnOrder.enemyActive:
 
                 EnemyController.Instance.StartEnemyAction();
+
+                if(currentEnemyMaxMana < maxMana)
+                {
+                    currentEnemyMaxMana++;
+                }
+                FillEnemyMana();
 
                     break;
 

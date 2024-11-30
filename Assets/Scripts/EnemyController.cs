@@ -106,7 +106,9 @@ public class EnemyController : MonoBehaviour
 
             }
         }
-        
+
+
+        CardScriptableObject selectedCard = null;
 
         switch (enemyAIType)
         {
@@ -126,6 +128,14 @@ public class EnemyController : MonoBehaviour
 
                 break;
             case AIType.handRandomPlace:
+
+                selectedCard = SelectedCardToPlay();
+                if(selectedCard != null)
+                {
+                    PlayCard(selectedCard, selectedPlacement);
+
+                }
+
 
 
                 break;
@@ -151,6 +161,7 @@ public class EnemyController : MonoBehaviour
 
     }
 
+
     void SetupHand()
     {
         
@@ -164,5 +175,42 @@ public class EnemyController : MonoBehaviour
             cardsInHand.Add(activeCards[0]);
             activeCards.RemoveAt(0);
         }
+    }
+
+    public void PlayCard(CardScriptableObject cardSO, CardPlacement cardPlacePoint)
+    {
+        Card newCard = Instantiate(cardToSpawn, cardToSpawnPoint.position, cardToSpawnPoint.rotation);
+        newCard.CardSO = cardSO;
+
+        newCard.SetupCard();
+        newCard.MoveToPoint(cardPlacePoint.transform.position + new Vector3(0f, 0f, .38f), Quaternion.identity);
+
+        cardPlacePoint.ActiveCard = newCard;
+        newCard.CardAssingedPlace = cardPlacePoint;
+        cardsInHand.Remove(cardSO);
+
+        BattleController.Instance.SpendEnemyMana(cardSO.manaCost);
+    }
+
+    CardScriptableObject SelectedCardToPlay()
+    {
+        CardScriptableObject cardToPlay = null;
+
+        List<CardScriptableObject> cardsToPlay = new List<CardScriptableObject>();
+
+        foreach(CardScriptableObject card in cardsInHand)
+        {
+            if(card.manaCost <= BattleController.Instance.EnemyMana)
+            {
+                cardsToPlay.Add(card);
+            }
+        }
+
+        if(cardsToPlay.Count > 0)
+        {
+            cardToPlay = cardsToPlay[Random.Range(0, cardsToPlay.Count)];
+        }
+
+        return cardToPlay;
     }
 }
