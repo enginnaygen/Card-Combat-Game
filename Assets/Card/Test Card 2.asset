@@ -15,8 +15,8 @@ MonoBehaviour:
   cardName: MUU
   actionDescription: Hry
   cardLore: Dark Cat
-  currentHealth: 3
-  attackPower: 2
+  currentHealth: 5
+  attackPower: 3
   manaCost: 1
   bgSprite: {fileID: 21300000, guid: 91f263c4e2d827c4fa3cb47b7369c9bf, type: 3}
   characterSprite: {fileID: 21300000, guid: 676c030a4bee5194ea2ae557ce40c306, type: 3}

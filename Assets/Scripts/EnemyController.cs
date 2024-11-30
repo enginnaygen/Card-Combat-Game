@@ -123,6 +123,9 @@ public class EnemyController : MonoBehaviour
         //buraya kadar olan nokta elimize kart doldurma ve karti nereye koyacagimizi secme
         CardScriptableObject selectedCard = null;
 
+        List<CardPlacement> prefferedPlacementPoints = new List<CardPlacement>();
+        List<CardPlacement> secondaryPlacementPoints = new List<CardPlacement>();
+
         switch (enemyAIType)
         {
             case AIType.placeFromDeck:
@@ -170,41 +173,97 @@ public class EnemyController : MonoBehaviour
                 break;
             case AIType.handDefensive:
 
-                selectedCard = SelectedDefensiveCard();
+                selectedCard = SelectedCardToPlay();
 
-                int iteration = 0;
+                prefferedPlacementPoints.Clear();
+                secondaryPlacementPoints.Clear();
 
-                while (selectedPlacement.ActiveCard != null && enemyCardPlacement.Count > 0)
+                for (int i = 0; i < enemyCardPlacement.Count; i++)
                 {
-                    randomSelectedPlacement = Random.Range(0, enemyCardPlacement.Count);
-                    selectedPlacement = enemyCardPlacement[randomSelectedPlacement];
-                    enemyCardPlacement.RemoveAt(randomSelectedPlacement);
-
+                    if (enemyCardPlacement[i].ActiveCard == null)
+                    {
+                        if(CardPointsController.Instance.playerCardPoints[i].ActiveCard != null)
+                        {
+                            prefferedPlacementPoints.Add(enemyCardPlacement[i]);
+                        }
+                        else
+                        {
+                            secondaryPlacementPoints.Add(enemyCardPlacement[i]);
+                        }
+                    }
                 }
 
-                while (selectedCard != null && selectedPlacement.ActiveCard == null && iteration < 50)
+                while(prefferedPlacementPoints.Count + secondaryPlacementPoints.Count > 0 && selectedCard != null && selectedCard.manaCost < BattleController.Instance.EnemyMana)
                 {
-                    PlayCard(selectedCard, selectedPlacement);
-
-                    selectedCard = SelectedCardToPlay();
-
-                    iteration++;
-                    yield return new WaitForSeconds(CardPointsController.Instance.TimeBetWeenAttacks);
-
-
-                    while (selectedPlacement.ActiveCard != null && enemyCardPlacement.Count > 0)
+                    if(prefferedPlacementPoints.Count > 0)
                     {
-                        randomSelectedPlacement = Random.Range(0, enemyCardPlacement.Count);
-                        selectedPlacement = enemyCardPlacement[randomSelectedPlacement];
-                        enemyCardPlacement.RemoveAt(randomSelectedPlacement);
+                        int selectPoint = Random.Range(0, prefferedPlacementPoints.Count);
+                        selectedPlacement = prefferedPlacementPoints[selectPoint];
+
+                        prefferedPlacementPoints.RemoveAt(selectPoint);
 
                     }
-                    //buraya kadar olan kisimda manamiz kadar ve yerlestirilecek alanimiz kadar kart secip yerlestiriyoruz
+                    else
+                    {
+                        int selectPoint = Random.Range(0, secondaryPlacementPoints.Count);
+                        selectedPlacement = secondaryPlacementPoints[selectPoint];
+
+                        secondaryPlacementPoints.RemoveAt(selectPoint);
+                    }
+
+                    PlayCard(selectedCard, selectedPlacement);
+
+                    yield return new WaitForSeconds(CardPointsController.Instance.TimeBetWeenAttacks);
+
                 }
+
 
                 break;
             case AIType.handOffensive:
 
+                selectedCard = SelectedCardToPlay();
+
+                prefferedPlacementPoints.Clear();
+                secondaryPlacementPoints.Clear();
+
+                for (int i = 0; i < enemyCardPlacement.Count; i++)
+                {
+                    if (enemyCardPlacement[i].ActiveCard == null)
+                    {
+                        if (CardPointsController.Instance.playerCardPoints[i].ActiveCard == null)
+                        {
+                            prefferedPlacementPoints.Add(enemyCardPlacement[i]);
+                        }
+                        else
+                        {
+                            secondaryPlacementPoints.Add(enemyCardPlacement[i]);
+                        }
+                    }
+                }
+
+                while (prefferedPlacementPoints.Count + secondaryPlacementPoints.Count > 0 && selectedCard != null && selectedCard.manaCost < BattleController.Instance.EnemyMana)
+                {
+                    if (prefferedPlacementPoints.Count > 0)
+                    {
+                        int selectPoint = Random.Range(0, prefferedPlacementPoints.Count);
+                        selectedPlacement = prefferedPlacementPoints[selectPoint];
+
+                        prefferedPlacementPoints.RemoveAt(selectPoint);
+
+                    }
+                    else
+                    {
+                        int selectPoint = Random.Range(0, secondaryPlacementPoints.Count);
+                        selectedPlacement = secondaryPlacementPoints[selectPoint];
+
+                        secondaryPlacementPoints.RemoveAt(selectPoint);
+                    }
+
+                    PlayCard(selectedCard, selectedPlacement);
+
+                    yield return new WaitForSeconds(CardPointsController.Instance.TimeBetWeenAttacks);
+
+                }
 
                 break;
             default:
@@ -271,37 +330,6 @@ public class EnemyController : MonoBehaviour
             cardToPlay = cardsToPlay[Random.Range(0, cardsToPlay.Count)];
         }
 
-        return cardToPlay;
-    }
-
-    CardScriptableObject SelectedDefensiveCard()
-    {
-        CardScriptableObject cardToPlay = null;
-
-        List<CardScriptableObject> cardsToPlay = new List<CardScriptableObject>();
-
-        foreach (CardScriptableObject card in cardsInHand)
-        {
-            int cardCurrentHealth = card.currentHealth;
-
-            if (card.manaCost <= BattleController.Instance.EnemyMana)
-            {
-                if(cardsToPlay.Count > 0 && cardCurrentHealth > cardsToPlay[cardsToPlay.Count-1].currentHealth)
-                {
-                    cardsToPlay.Add(card);
-                    cardsToPlay[0] = cardsToPlay[cardsToPlay.Count - 1];
-                 
-                }
-                else
-                {
-                    cardsToPlay.Add(card);
-
-                }
-            }
-            
-        }
-
-        cardToPlay = cardsToPlay[0];
         return cardToPlay;
     }
 

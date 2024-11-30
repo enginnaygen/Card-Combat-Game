@@ -15,8 +15,8 @@ MonoBehaviour:
   cardName: Try
   actionDescription: Mry
   cardLore: Dungeon Creature
-  currentHealth: 2
-  attackPower: 1
+  currentHealth: 3
+  attackPower: 5
   manaCost: 3
   bgSprite: {fileID: 21300000, guid: 95bae3e75408f0b4392f33af0bbd2888, type: 3}
   characterSprite: {fileID: 21300000, guid: a6ef78d47a00c1547a3567caa54f2139, type: 3}
