@@ -56,6 +56,11 @@ public class CardPointsController : MonoBehaviour
                 yield return new WaitForSeconds(timeBetweenAttacks);
 
             }
+            if(BattleController.Instance.BattleEnded)
+            {
+                break;
+            }
+
         }
 
         CheckAssignedCards();
@@ -88,6 +93,11 @@ public class CardPointsController : MonoBehaviour
                 enemyCardPoints[i].ActiveCard.Animator.SetTrigger("Attack");
                 yield return new WaitForSeconds(timeBetweenAttacks);
 
+            }
+
+            if (BattleController.Instance.BattleEnded)
+            {
+                break;
             }
         }
 

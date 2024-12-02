@@ -17,14 +17,16 @@ public class BattleController : MonoBehaviour
     [SerializeField] int playerHealth;
     [SerializeField] int enemyHealth;
     [SerializeField] Transform discardPoint;
+    [SerializeField] bool battleEnded;
 
     int currentPlayerMaxMana;
     int currentEnemyMaxMana;
 
+    public bool BattleEnded => battleEnded;
     public int PlayerMana => playerMana;
     public int PlayerHealth => playerHealth;
     public int EnemyMana => enemyMana;
-    public int CardsToDrawBuTurn => cardsToDrawByTurn;
+    public int CardsToDrawByTurn => cardsToDrawByTurn;
     public Transform DiscardPoint => discardPoint;
 
     public enum TurnOrder { playerActive, playerCardAttacks, enemyActive, enemyCardAttacks }
@@ -110,6 +112,7 @@ public class BattleController : MonoBehaviour
 
     public void AdvancePhase()
     {
+        if (battleEnded) return;
         currentPhase++;
 
         if ((int)currentPhase >= System.Enum.GetValues(typeof(TurnOrder)).Length)
@@ -176,7 +179,7 @@ public class BattleController : MonoBehaviour
 
     public void DamagePlayer(int damageAmount)
     {
-        if(playerHealth > 0)
+        if(playerHealth > 0 || !battleEnded)
         {
             playerHealth -= damageAmount;
 
@@ -184,7 +187,7 @@ public class BattleController : MonoBehaviour
             {
                 playerHealth = 0;
 
-                //end battle
+                EndBattle();
 
             }
 
@@ -199,7 +202,7 @@ public class BattleController : MonoBehaviour
 
     public void DamageEnemy(int damageAmount)
     {
-        if (enemyHealth > 0)
+        if (enemyHealth > 0 || !battleEnded)
         {
             enemyHealth -= damageAmount;
 
@@ -207,7 +210,7 @@ public class BattleController : MonoBehaviour
             {
                 enemyHealth = 0;
 
-                //end battle
+                EndBattle();
 
             }
 
@@ -217,6 +220,11 @@ public class BattleController : MonoBehaviour
             damageClone.DamageIndicator.text = damageAmount.ToString();
             damageClone.gameObject.SetActive(true);
         }
+    }
+
+    void EndBattle()
+    {
+        battleEnded = true;
     }
 
 }

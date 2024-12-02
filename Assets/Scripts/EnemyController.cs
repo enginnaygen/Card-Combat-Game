@@ -86,7 +86,7 @@ public class EnemyController : MonoBehaviour
 
         if(enemyAIType != AIType.placeFromDeck)
         {
-            for (int i = 0; i < BattleController.Instance.CardsToDrawBuTurn; i++)
+            for (int i = 0; i < BattleController.Instance.CardsToDrawByTurn; i++)
             {
                 cardsInHand.Add(activeCards[0]);
                 activeCards.RemoveAt(0);
