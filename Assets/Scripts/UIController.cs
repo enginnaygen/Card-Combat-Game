@@ -11,22 +11,30 @@ public class UIController : MonoBehaviour
     [SerializeField] TMP_Text playerHealthText;
     [SerializeField] TMP_Text enemyHealthText;
     [SerializeField] TMP_Text enemyManaText;
+    [SerializeField] TMP_Text battleResultText;
     [SerializeField] GameObject manaWarningText;
 
     [SerializeField] float manaWarningTime;
     [SerializeField] GameObject drawCardButton;
     [SerializeField] GameObject endTurnButton;
+    [SerializeField] GameObject endBattleScreen;
+
 
     [SerializeField] UIDamageIndicator playerDamage;
     [SerializeField] UIDamageIndicator enemyDamage;
 
+
     float manaWarningCounter;
+
 
     public GameObject DrawCardButton { get { return drawCardButton; } set { drawCardButton = value; } }
     public GameObject EndTurnButton { get { return endTurnButton; } set { endTurnButton = value; } }
+    public GameObject EndBattleScreen { get { return endBattleScreen; } set { endBattleScreen = value; } }
+    public TMP_Text BattleResultText { get { return battleResultText; } set { battleResultText = value; } }
 
     public UIDamageIndicator PlayerDamage => playerDamage;
     public UIDamageIndicator EnemyDamage => enemyDamage;
+
 
     private void Awake()
     {
@@ -98,4 +106,18 @@ public class UIController : MonoBehaviour
         BattleController.Instance.EndPlayerTurn();
     }
 
+    public void MainMenu()
+    {
+
+    }
+
+    public void RestartLevel()
+    {
+
+    }
+
+    public void SelectNewBattle()
+    {
+
+    }
 }

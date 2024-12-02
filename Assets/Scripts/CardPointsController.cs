@@ -123,4 +123,34 @@ public class CardPointsController : MonoBehaviour
             }
         }
     }
+
+    public void EmptyPlayerPlacementsTable()
+    {
+        foreach(CardPlacement playerPlacement in playerCardPoints)
+        {
+            if(playerPlacement.ActiveCard != null)
+            {
+                playerPlacement.ActiveCard.MoveToPoint(BattleController.Instance.DiscardPoint.position, BattleController.Instance.DiscardPoint.rotation);
+                playerPlacement.ActiveCard = null;
+            }
+           
+        }
+
+        
+    }
+
+    public void EmptyEnemyPlacementsTable()
+    {
+        foreach (CardPlacement enemyPlacement in enemyCardPoints)
+        {
+            if (enemyPlacement.ActiveCard != null)
+            {
+                enemyPlacement.ActiveCard.MoveToPoint(BattleController.Instance.DiscardPoint.position, BattleController.Instance.DiscardPoint.rotation);
+                enemyPlacement.ActiveCard = null;
+            }
+
+        }
+    }
+
+
 }

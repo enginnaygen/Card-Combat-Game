@@ -7,6 +7,7 @@ public class BattleController : MonoBehaviour
 {
     public static BattleController Instance;
 
+    [Header("Integer Value Settings")]
     [SerializeField] int maxMana = 12;
     [SerializeField] int playerStartingMana = 4;
     [SerializeField] int enemyStartingMana = 4;
@@ -16,7 +17,13 @@ public class BattleController : MonoBehaviour
     [SerializeField] int cardsToDrawByTurn = 1;
     [SerializeField] int playerHealth;
     [SerializeField] int enemyHealth;
+
+    [Header("Float Value Settings")]
+    [SerializeField] float battleEndDelay = 2f;
+
+    [Header("Transform Value Settings")]
     [SerializeField] Transform discardPoint;
+    [Header("Just For Observation")]
     [SerializeField] bool battleEnded;
 
     int currentPlayerMaxMana;
@@ -30,7 +37,9 @@ public class BattleController : MonoBehaviour
     public Transform DiscardPoint => discardPoint;
 
     public enum TurnOrder { playerActive, playerCardAttacks, enemyActive, enemyCardAttacks }
-    TurnOrder currentPhase;
+
+    [Header("Whoose Turn")]
+    [SerializeField] TurnOrder currentPhase;
 
     public TurnOrder CurrentPhase => currentPhase;
 
@@ -227,6 +236,28 @@ public class BattleController : MonoBehaviour
         battleEnded = true;
 
         HandController.Instance.EmptyHand();
+
+        if(enemyHealth <=0)
+        {
+            UIController.Instance.BattleResultText.text = "You Won!";
+            CardPointsController.Instance.EmptyEnemyPlacementsTable();
+        }
+        else
+        {
+            UIController.Instance.BattleResultText.text = "You Lost!";
+            CardPointsController.Instance.EmptyPlayerPlacementsTable();
+
+
+        }
+        StartCoroutine(ShowResultCO());
+
+    }
+
+    IEnumerator ShowResultCO()
+    {
+        yield return new WaitForSeconds(battleEndDelay);
+        UIController.Instance.EndBattleScreen.SetActive(true);
+
     }
 
 }
