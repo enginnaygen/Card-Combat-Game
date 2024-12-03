@@ -12,7 +12,7 @@ public class MainMenu : MonoBehaviour
     [SerializeField] GameObject selectPanel;
     void Start()
     {
-        
+        AudioManager.Instance.PlayMenuMusic();
     }
 
    public void StartGame()
