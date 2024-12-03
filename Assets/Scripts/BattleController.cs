@@ -20,6 +20,7 @@ public class BattleController : MonoBehaviour
 
     [Header("Float Value Settings")]
     [SerializeField] float battleEndDelay = 2f;
+    [SerializeField] [Range(0,1)] float enemyGoFirstChance = .5f;
 
     [Header("Transform Value Settings")]
     [SerializeField] Transform discardPoint;
@@ -58,6 +59,19 @@ public class BattleController : MonoBehaviour
         FillEnemyMana();
         UIController.Instance.SetPlayerHealthText(playerHealth);
         UIController.Instance.SetEnemyHealthText(enemyHealth);
+
+        if(Random.value < enemyGoFirstChance)
+        {
+            currentPhase = TurnOrder.playerCardAttacks;
+            AdvancePhase();
+
+        }
+        else
+        {
+            currentPhase = TurnOrder.enemyCardAttacks;
+            AdvancePhase();
+
+        }
 
     }
 

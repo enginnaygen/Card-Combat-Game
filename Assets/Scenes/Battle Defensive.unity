@@ -764,6 +764,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: BattleController
       objectReference: {fileID: 0}
+    - target: {fileID: 3883885902279321723, guid: 7ec6035b6ecf64446871220a572e36c4, type: 3}
+      propertyPath: enemyGoFirstChance
+      value: 0.5
+      objectReference: {fileID: 0}
     - target: {fileID: 7170655496685132068, guid: 7ec6035b6ecf64446871220a572e36c4, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0

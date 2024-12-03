@@ -52,8 +52,8 @@ MonoBehaviour:
   enemyMana: 0
   startCardAmount: 5
   cardsToDrawByTurn: 1
-  playerHealth: 10
-  enemyHealth: 10
+  playerHealth: 50
+  enemyHealth: 50
   battleEndDelay: 2
   discardPoint: {fileID: 4425775370547308262}
   battleEnded: 0
