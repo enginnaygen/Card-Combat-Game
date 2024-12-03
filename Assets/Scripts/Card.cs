@@ -96,7 +96,7 @@ public class Card : MonoBehaviour
                                                                                                       // dogru yaklasiyor seklinde anladim
         transform.rotation = Quaternion.RotateTowards(transform.rotation, targetRotation, rotateSpeed * Time.deltaTime);
 
-        if(isSelected)
+        if(isSelected && !BattleController.Instance.BattleEnded && Time.timeScale != 0f)
         {
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 
@@ -224,7 +224,7 @@ public class Card : MonoBehaviour
 
     private void OnMouseDown()
     {
-        if(inHand && BattleController.Instance.CurrentPhase == BattleController.TurnOrder.playerActive && isPlayer && !BattleController.Instance.BattleEnded)
+        if(inHand && BattleController.Instance.CurrentPhase == BattleController.TurnOrder.playerActive && isPlayer && !BattleController.Instance.BattleEnded && Time.timeScale != 0f)
         {
             isSelected = true;
             collider.enabled = false;

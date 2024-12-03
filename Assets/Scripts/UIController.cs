@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using UnityEngine.SceneManagement;
 
 public class UIController : MonoBehaviour
 {
@@ -18,10 +19,13 @@ public class UIController : MonoBehaviour
     [SerializeField] GameObject drawCardButton;
     [SerializeField] GameObject endTurnButton;
     [SerializeField] GameObject endBattleScreen;
+    [SerializeField] GameObject pausePanel;
 
 
     [SerializeField] UIDamageIndicator playerDamage;
     [SerializeField] UIDamageIndicator enemyDamage;
+
+    [SerializeField] bool pause;
 
 
     float manaWarningCounter;
@@ -51,6 +55,11 @@ public class UIController : MonoBehaviour
             {
                 manaWarningText.SetActive(false);
             }
+        }
+
+        if(Input.GetKeyDown(KeyCode.Space))
+        {
+            PauseUnpause();
         }
     }
 
@@ -108,16 +117,33 @@ public class UIController : MonoBehaviour
 
     public void MainMenu()
     {
+        SceneManager.LoadScene(0);
+        Time.timeScale = 1f;
 
     }
 
     public void RestartLevel()
     {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        Time.timeScale = 1f;
 
     }
 
-    public void SelectNewBattle()
+    public void PauseUnpause()
     {
+        pause = !pause;
+
+        pausePanel.SetActive(pause);
+
+        if(pause)
+        {
+            Time.timeScale = 0f;
+        }
+        else
+        {
+            Time.timeScale = 1f;
+        }
+
 
     }
 }

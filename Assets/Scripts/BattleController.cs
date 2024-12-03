@@ -64,10 +64,10 @@ public class BattleController : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space))
+        /*if (Input.GetKeyDown(KeyCode.Space))
         {
             AdvancePhase();
-        }
+        }*/
 
     }
     private void Singelton()
