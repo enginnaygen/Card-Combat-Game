@@ -10,13 +10,13 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f562e18fc36dfb741b699e35a7b3d22d, type: 3}
-  m_Name: Test Card 2
+  m_Name: Ballie
   m_EditorClassIdentifier: 
-  cardName: MUU
-  actionDescription: Hry
-  cardLore: Dark Cat
-  currentHealth: 5
-  attackPower: 3
-  manaCost: 1
-  bgSprite: {fileID: 21300000, guid: 91f263c4e2d827c4fa3cb47b7369c9bf, type: 3}
-  characterSprite: {fileID: 21300000, guid: 676c030a4bee5194ea2ae557ce40c306, type: 3}
+  cardName: Ballie
+  actionDescription: Attack from underground with his sharp teeths
+  cardLore: Underground Creature
+  currentHealth: 4
+  attackPower: 4
+  manaCost: 5
+  bgSprite: {fileID: 21300000, guid: 051b6f6c81b57ac4a9ef7f65b46ae866, type: 3}
+  characterSprite: {fileID: 21300000, guid: bebfa67a9a0e405418b1fea3d82e2f85, type: 3}

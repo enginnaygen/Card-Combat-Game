@@ -45,8 +45,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 681e9cbb0b6d4ef4a8523ba3a03e48a7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxMana: 12
-  playerStartingMana: 10
+  maxMana: 15
+  playerStartingMana: 5
   enemyStartingMana: 5
   playerMana: 0
   enemyMana: 0
@@ -55,6 +55,7 @@ MonoBehaviour:
   playerHealth: 50
   enemyHealth: 50
   battleEndDelay: 2
+  enemyGoFirstChance: 0.5
   discardPoint: {fileID: 4425775370547308262}
   battleEnded: 0
   currentPhase: 0

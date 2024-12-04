@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f562e18fc36dfb741b699e35a7b3d22d, type: 3}
+  m_Name: Scary Wolf
+  m_EditorClassIdentifier: 
+  cardName: Scary Wolf
+  actionDescription: Deadly bites
+  cardLore: Jungle Creature
+  currentHealth: 10
+  attackPower: 5
+  manaCost: 7
+  bgSprite: {fileID: 21300000, guid: e3d89e19a761a504ba8b8e785d1a420e, type: 3}
+  characterSprite: {fileID: 21300000, guid: 33e5981cfb3781a4fa503bb23c8284c3, type: 3}

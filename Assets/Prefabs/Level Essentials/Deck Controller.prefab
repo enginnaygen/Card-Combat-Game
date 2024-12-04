@@ -25,7 +25,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4449963651210375445}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -1, w: 0.0000029504295}
+  m_LocalRotation: {x: 0, y: 0, z: -1, w: 0}
   m_LocalPosition: {x: 5.040001, y: 0.8, z: -0.832}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -46,9 +46,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   deckToUse:
-  - {fileID: 11400000, guid: e04513eb364382c418963ad7dd8dbc6a, type: 2}
   - {fileID: 11400000, guid: 307fdfc77dc17ca4fafd79eb87ea4c3c, type: 2}
+  - {fileID: 11400000, guid: e04513eb364382c418963ad7dd8dbc6a, type: 2}
+  - {fileID: 11400000, guid: fd6f04d240affc24ebea567a64516d7a, type: 2}
+  - {fileID: 11400000, guid: ec3810bffe9666547b3f40adc54bc592, type: 2}
   - {fileID: 11400000, guid: 54a9602f1d99c9b4783f8120041ed552, type: 2}
+  - {fileID: 11400000, guid: ef7053efecca79c4caf20a75bafa7b64, type: 2}
+  - {fileID: 11400000, guid: bb7bc531b6f70d246b0e7796c61c0269, type: 2}
+  - {fileID: 11400000, guid: 1427c9ef47042104181d2852d3fc0679, type: 2}
   cardToSpawn: {fileID: 9196368504081597626, guid: 9f5ab4b8111ae364f9620fe375ab8d14, type: 3}
   drawCardCost: 2
   waitBetweenFirstDrawCards: 0.3

@@ -10,13 +10,13 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f562e18fc36dfb741b699e35a7b3d22d, type: 3}
-  m_Name: Test Card 1
+  m_Name: Black Cat
   m_EditorClassIdentifier: 
-  cardName: Gry
-  actionDescription: Dry
-  cardLore: Forest Creature
-  currentHealth: 4
-  attackPower: 4
-  manaCost: 5
-  bgSprite: {fileID: 21300000, guid: e3d89e19a761a504ba8b8e785d1a420e, type: 3}
-  characterSprite: {fileID: 21300000, guid: bebfa67a9a0e405418b1fea3d82e2f85, type: 3}
+  cardName: Black Cat
+  actionDescription: Attack with his deadly pawn
+  cardLore: Dungeon Creature
+  currentHealth: 1
+  attackPower: 5
+  manaCost: 2
+  bgSprite: {fileID: 21300000, guid: 95bae3e75408f0b4392f33af0bbd2888, type: 3}
+  characterSprite: {fileID: 21300000, guid: a6ef78d47a00c1547a3567caa54f2139, type: 3}
