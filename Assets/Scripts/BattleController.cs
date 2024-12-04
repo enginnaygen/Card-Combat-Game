@@ -73,6 +73,8 @@ public class BattleController : MonoBehaviour
 
         }
 
+        AudioManager.Instance.PlayBGMusic();
+
     }
 
 
@@ -220,6 +222,9 @@ public class BattleController : MonoBehaviour
             damageClone.DamageIndicator.text = damageAmount.ToString();
             damageClone.gameObject.SetActive(true);
 
+            AudioManager.Instance.PlayeSFX(6);
+
+
         }
     }
 
@@ -242,6 +247,9 @@ public class BattleController : MonoBehaviour
             UIDamageIndicator damageClone = Instantiate(UIController.Instance.EnemyDamage, UIController.Instance.EnemyDamage.transform.parent);
             damageClone.DamageIndicator.text = damageAmount.ToString();
             damageClone.gameObject.SetActive(true);
+
+            AudioManager.Instance.PlayeSFX(5);
+
         }
     }
 

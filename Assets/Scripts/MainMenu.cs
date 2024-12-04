@@ -13,6 +13,7 @@ public class MainMenu : MonoBehaviour
     void Start()
     {
         AudioManager.Instance.PlayMenuMusic();
+
     }
 
    public void StartGame()
@@ -22,17 +23,23 @@ public class MainMenu : MonoBehaviour
 
     public void DefensiveGame()
     {
+        AudioManager.Instance.PlayeSFX(0);
+
         SceneManager.LoadScene(defensiveBattleSceneName);
     }
 
     public void OffensiveGame()
     {
+        AudioManager.Instance.PlayeSFX(0);
+
         SceneManager.LoadScene(offensiveBattleSceneName);
 
     }
 
     public void CrazyGame()
     {
+        AudioManager.Instance.PlayeSFX(0);
+
         SceneManager.LoadScene(crazyBattleSceneName);
 
     }
@@ -40,5 +47,13 @@ public class MainMenu : MonoBehaviour
     public void QuitGame()
     {
         Application.Quit();
+    }
+
+    public void PlayBattleSelectSong()
+    {
+        AudioManager.Instance.PlaySelectPanelMusic();
+
+        AudioManager.Instance.PlayeSFX(0);
+
     }
 }

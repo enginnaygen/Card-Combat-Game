@@ -8,7 +8,11 @@ public class AudioManager : MonoBehaviour
 
     [SerializeField] AudioSource menuMusic;
     [SerializeField] AudioSource battleSelectMusic;
-    [SerializeField] AudioSource[] sfxs;
+    [SerializeField] AudioSource[] bgm;
+    [SerializeField] AudioSource[] sfx;
+
+    int currentBGM;
+    bool playingBGM;
 
 
     private void Awake()
@@ -33,10 +37,12 @@ public class AudioManager : MonoBehaviour
         menuMusic.Stop();
         battleSelectMusic.Stop();
 
-        foreach(AudioSource sfx in sfxs)
+        foreach(AudioSource bgmusic in bgm)
         {
-            sfx.Stop();
+            bgmusic.Stop();
         }
+
+        playingBGM = false;
     }
 
     public void PlayMenuMusic()
@@ -51,9 +57,27 @@ public class AudioManager : MonoBehaviour
         battleSelectMusic.Play();
     }
 
-    public void PlaySFX(AudioSource sfx)
+    public void PlayBGMusic()
     {
         StopMusic();
-        sfx.Play();
+
+        int currentMusic = currentBGM;
+
+        currentBGM = Random.Range(0, bgm.Length);
+
+        while(currentBGM == currentMusic)
+        {
+            currentBGM = Random.Range(0, bgm.Length);
+        }
+
+        bgm[currentBGM].Play();
+
+        playingBGM = true;
+    }
+
+    public void PlayeSFX(int SFXToPlay)
+    {
+        sfx[SFXToPlay].Stop();
+        sfx[SFXToPlay].Play();
     }
 }

@@ -309,6 +309,9 @@ public class EnemyController : MonoBehaviour
         cardsInHand.Remove(cardSO);
 
         BattleController.Instance.SpendEnemyMana(cardSO.manaCost);
+
+        AudioManager.Instance.PlayeSFX(4);
+
     }
 
     CardScriptableObject SelectedCardToPlay()
